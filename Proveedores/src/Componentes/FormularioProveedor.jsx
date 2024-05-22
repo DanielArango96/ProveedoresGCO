@@ -22,17 +22,17 @@ const FormularioProveedor = () => {
 
   useEffect(() => {
     // Fetch countries from your backend
-    axios.get('/paises')
+    axios.get('http://localhost:8080/paises/')
       .then(response => setPaises(response.data))
-      .catch(error => console.error('Error fetching countries:', error));
+      .catch(error => console.error('Error fetching paises:', error));
   }, []);
 
   useEffect(() => {
     if (formData.paisId) {
       // Fetch departments based on selected country
-      axios.get(`/departamentos?paisId=${formData.paisId}`)
+      axios.get(`http://localhost:8080/departamentos/?paisId=${formData.paisId}`)
         .then(response => setDepartamentos(response.data))
-        .catch(error => console.error('Error fetching departments:', error));
+        .catch(error => console.error('Error fetching departmentos:', error));
     } else {
       setDepartamentos([]);
       setCiudades([]);
@@ -42,9 +42,9 @@ const FormularioProveedor = () => {
   useEffect(() => {
     if (formData.departamentoId) {
       // Fetch cities based on selected department
-      axios.get(`/ciudades?departamentoId=${formData.departamentoId}`)
+      axios.get(`http://localhost:8080/ciudades/?departamentoId=${formData.departamentoId}`)
         .then(response => setCiudades(response.data))
-        .catch(error => console.error('Error fetching cities:', error));
+        .catch(error => console.error('Error fetching ciudades:', error));
     } else {
       setCiudades([]);
     }
@@ -67,7 +67,7 @@ const FormularioProveedor = () => {
         formDataToSend.append(key, formData[key]);
       }
 
-      await axios.post('/proveedores', formDataToSend, {
+      await axios.post('http://localhost:8080/proveedores', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

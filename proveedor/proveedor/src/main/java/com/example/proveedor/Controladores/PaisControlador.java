@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/paises")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PaisControlador {
 
     @Autowired
